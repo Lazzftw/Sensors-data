@@ -1,19 +1,31 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-        Ionic 5 Geolocation & Geocoder Examples
+        Data collection 
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="connect(); coToggles()" *ngIf="coToggle">
+        Connect
+      </ion-button>
+      <ion-button (click)="disconnect(); coToggles()" *ngIf="!coToggle" color="danger" >
+        Disconnect
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
 
-    <ion-button (click)="getCurrentCoordinates()" expand="block">
+    <ion-button (click)="startRecording(); showToggles()" expand="block" *ngIf="showToggle">
       Start Recording
     </ion-button>
+    <ion-button (click)="stopRecord(); showToggles()" expand="block" *ngIf="!showToggle" color="danger">
+      <ion-icon name="pause"></ion-icon>
+      Stop Recording
+    </ion-button>
     <ion-button (click)="saveData()" expand="block">
-      save file
+      Save Data
     </ion-button>
   <ion-list>
     <ion-list-header>
@@ -21,7 +33,7 @@
     </ion-list-header>
     <ion-item>
       <ion-label>
-        Latitue
+        Latitude
       </ion-label>
       <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
     </ion-item>
@@ -31,6 +43,15 @@
       </ion-label>
       <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
     </ion-item>
+    <ion-item>
+      <ion-label>
+        GSR
+      </ion-label>
+      <ion-badge color="danger" slot="end">{{gsr}}</ion-badge>
+    </ion-item>
     </ion-list>    
   </div>
+  <ion-button (click)="resetAlert()" class="block magenta margin-auto" size="small" fill="clear" color="red">
+    Reset
+  </ion-button>
 </ion-content>

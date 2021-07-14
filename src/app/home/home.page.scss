@@ -25,3 +25,19 @@
 #container a {
   text-decoration: none;
 }
+.text-center {
+  text-align: center;
+  margin-left: 40%;
+}
+.button.block {
+  display: block;
+  width: 200px;    
+}
+
+.margin-auto {
+  margin: 0 auto;
+}
+.custom-loader-class{
+  --background:#F4B004;
+  font-size: 20px;
+}
