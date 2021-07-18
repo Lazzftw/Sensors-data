@@ -4,7 +4,7 @@
         Data collection 
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="connect(); coToggles()" *ngIf="coToggle">
+      <ion-button (click)="connect()" *ngIf="coToggle">
         Connect
       </ion-button>
       <ion-button (click)="disconnect(); coToggles()" *ngIf="!coToggle" color="danger" >
@@ -32,25 +32,28 @@
       <ion-label>Location Coordinates</ion-label>
     </ion-list-header>
     <ion-item>
-      <ion-label>
+      <ion-label (click)="gsr1()">
         Latitude
       </ion-label>
       <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
     </ion-item>
     <ion-item>
-      <ion-label>
+      <ion-label (click)="gsr2()">
         Longitude
       </ion-label>
       <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
     </ion-item>
     <ion-item>
-      <ion-label>
+      <ion-label (click)="gsr3()">
         GSR
       </ion-label>
       <ion-badge color="danger" slot="end">{{gsr}}</ion-badge>
     </ion-item>
     </ion-list>    
   </div>
+  <ion-button (click)="goToMaps()" expand="block">
+    Show route in Map
+  </ion-button>
   <ion-button (click)="resetAlert()" class="block magenta margin-auto" size="small" fill="clear" color="red">
     Reset
   </ion-button>
