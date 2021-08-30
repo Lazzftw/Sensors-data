@@ -14,7 +14,7 @@ export class HomePage {
   latitude: any = 0; //latitude
   longitude: any = 0; //longitude
   table= [] ;
-  dir= 'file:///storage/emulated/0/';
+  dir= 'file:///storage/emulated/0/SensorData/';
   filename = '';
   object;
   gsr: any = 0;
@@ -40,22 +40,15 @@ export class HomePage {
     maximumAge: 3600
   };
 
-async  toastConnect(resp){
-    let toast = await this.toastCtrl.create({
-      message: resp,
-      duration: 3000
-    });                     
-  await  toast.present()
-  }
 
 
-  connect() {
+  connect(ipadress) {
     this.toastConnect('Connecting to Micro-controller...')
-    this.blserial.connect("08:3A:F2:AC:B6:82").subscribe( (connectSuccess) => {                  
+    this.blserial.connect(ipadress).subscribe( (connectSuccess) => {                  
       console.log(connectSuccess);
       this.toastConnect('Succesfully connected')
       this.coToggles()
-      
+
 
     }, connectCallback => {
       console.log('disconnected');
@@ -87,11 +80,11 @@ startRecording(){
 
 // use geolocation to get user's device coordinates
 getCurrentCoordinates() {
-  this.gsr = 1702
 this.interval=  setInterval(() => {
-    // this.blserial.read().then((success)=>{
-    //   this.gsr= success;
-    // })
+     this.blserial.read().then((success)=>{
+       success= success.replace('\r\n','');
+       this.gsr= success;
+     })
   this.geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 20000, maximumAge: 10000 }).then((resp) => {
     this.latitude = resp.coords.latitude;
     this.longitude = resp.coords.longitude;
@@ -197,13 +190,79 @@ goToMaps(){
 };
 this.navCtrl.navigateForward('map', navigationExtras);
 }
-gsr1(){
-  this.gsr = 1702
+
+async  toastConnect(resp){
+  let toast = await this.toastCtrl.create({
+    message: resp,
+    duration: 3000
+  });                     
+await  toast.present()
 }
-gsr2(){
-  this.gsr = 1650
-}
-gsr3(){
-  this.gsr = 1500
+
+async presentAlertRadio() {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    header: 'Bluetooth Device',
+    message: 'Please choose your bluetooth device',
+    inputs: [
+      {
+        name: 'Device 1',
+        type: 'radio',
+        label: 'Device 1',
+        value: '3C:61:05:49:44:CA',
+        handler: (res) => {
+        },
+        checked: true
+      },
+      {
+        name: 'Device 2',
+        type: 'radio',
+        label: 'Device 2',
+        value: '84:CC:A8:12:19:86',
+        handler: () => {
+        }
+      },
+      {
+        name: 'Device 3',
+        type: 'radio',
+        label: 'Device 3',
+        value: '84:CC:A8:11:F5:9A',
+        handler: () => {
+        }
+      },
+      {
+        name: 'Device 4',
+        type: 'radio',
+        label: 'Device 4',
+        value: '84:CC:A8:11:F9:A2',
+        handler: () => {
+        }
+      },
+      {
+        name: 'Device 5',
+        type: 'radio',
+        label: 'Device 5',
+        value: '94:B9:7E:6B:E9:12',
+        handler: () => {
+        }
+      }
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {
+        }
+      }, {
+        text: 'Ok',
+        handler: (res) => {
+          this.connect(res)
+        }
+      }
+    ]
+  });
+
+  await alert.present();
 }
 }
