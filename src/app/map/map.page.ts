@@ -54,26 +54,29 @@ export class MapPage implements OnInit {
 
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      for (var i = 0; i < this.table.length-1; i++) {
-        if (this.table[i].gsr  < 1600 ){
-          var PathStyle = new google.maps.Polyline({
-            path: [this.table[i], this.table[i+1]],
-            strokeColor: "#FF0000",
-            strokeOpacity: 1.0,
-            strokeWeight: 5,
-          });
-          PathStyle.setMap(this.map)
-        }
-       else if (this.table[i].gsr < 1700 && this.table[i].gsr > 1600 ){
-        var PathStyles = new google.maps.Polyline({
-          path: [this.table[i], this.table[i+1]],
-          strokeColor: "#FFAA00",
-          strokeOpacity: 1.0,
-          strokeWeight: 5,          
-        });
-        PathStyles.setMap(this.map)
-      }
-    else  if (this.table[i].gsr  >= 1700 ){
+      for (var i = 2; i < this.table.length-1; i++) {
+        var temp = this.table[i].gsr - this.table[i-2].gsr
+        temp = Math.abs(temp)
+        // if (this.table[i].gsr - this.table[i-2].gsr  < 20 ){
+          
+        //   var PathStyle = new google.maps.Polyline({
+        //     path: [this.table[i], this.table[i+1]],
+        //     strokeColor: "#FF0000",
+        //     strokeOpacity: 1.0,
+        //     strokeWeight: 5,
+        //   });
+        //   PathStyle.setMap(this.map)
+        // }
+      //   if  {
+      //   var PathStyles = new google.maps.Polyline({
+      //     path: [this.table[i], this.table[i+1]],
+      //     strokeColor: "#FFAA00",
+      //     strokeOpacity: 1.0,
+      //     strokeWeight: 5,          
+      //   });
+      //   PathStyles.setMap(this.map)
+      // }
+        if ( temp > 50 ){
         var PathStyless = new google.maps.Polyline({
           path: [this.table[i], this.table[i+1]],
           strokeColor: "#33FF00",

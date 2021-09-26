@@ -41,3 +41,18 @@
   --background:#F4B004;
   font-size: 20px;
 }
+ion-content.background{
+  --background: url(../../assets/images/1.jpg) 0 0/100% 100% no-repeat;
+}
+ion-list {
+  --ion-item-background: transparent;
+}
+.cardconteudo {
+  // background: rgba(255,255,255,0.5);
+  background:transparent;
+}
+ion-button {
+  font-size:medium;
+  padding: 2px;
+  // width:50%;
+}

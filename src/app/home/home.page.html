@@ -14,47 +14,64 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-
-    <ion-button (click)="startRecording(); showToggles()" expand="block" *ngIf="showToggle">
+<ion-content class="background">
+  <div class="ion-padding" >
+    <ion-button class="block magenta margin-auto" color="light"   (click)="startRecording(); showToggles()"  *ngIf="showToggle">
       Start Recording
     </ion-button>
-    <ion-button (click)="stopRecord(); showToggles()" expand="block" *ngIf="!showToggle" color="danger">
+    <ion-button class="block magenta margin-auto" color="light" (click)="stopRecord(); showToggles()"  *ngIf="!showToggle" color="danger">
       <ion-icon name="pause"></ion-icon>
       Stop Recording
     </ion-button>
-    <ion-button (click)="saveData()" expand="block">
+    <ion-button class="block magenta margin-auto" color="light" (click)="saveData()">
       Save Data
     </ion-button>
   <ion-list>
     <ion-list-header>
-      <ion-label>Location Coordinates</ion-label>
+      <ion-label color="light">Location Coordinates</ion-label>
     </ion-list-header>
     <ion-item>
-      <ion-label >
+      <ion-label  color="light">
         Latitude
       </ion-label>
       <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
     </ion-item>
     <ion-item>
-      <ion-label >
+      <ion-label color="light" >
         Longitude
       </ion-label>
       <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
     </ion-item>
     <ion-item>
-      <ion-label >
+      <ion-label color="light">
         GSR
       </ion-label>
-      <ion-badge color="danger" slot="end">{{gsr}}</ion-badge>
+      <ion-badge color="danger" slot="end" >{{gsr}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label color="light">
+        Speed
+      </ion-label>
+      <ion-badge color="danger" slot="end" >{{speed}} km/h</ion-badge>
     </ion-item>
     </ion-list>    
   </div>
-  <ion-button (click)="goToMaps()" expand="block">
+  <ion-button class="block magenta margin-auto" color="light"  (click)="goToMaps()" >
     Show route in Map
   </ion-button>
-  <ion-button (click)="resetAlert()" class="block magenta margin-auto" size="small" fill="clear" color="red">
+  <ion-button color="danger" (click)="resetAlert()" class="block magenta margin-auto" size="small" >
     Reset
   </ion-button>
+  <ion-card class="cardconteudo">
+    <ion-card-header>
+      <ion-button (click)="createBarChart()"  size="small" color="light" shape="round">Show Chart</ion-button>
+      <ion-button  (click)="downloadChart()"  color="medium" shape="round" size="small">
+        <ion-icon  name="download-outline"></ion-icon>
+      </ion-button>
+      <ion-card-subtitle color="light" >GSR collected data </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barChart></canvas>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
